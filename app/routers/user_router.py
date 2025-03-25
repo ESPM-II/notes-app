@@ -7,10 +7,10 @@ from app.services.auth import hash_password
 
 router = APIRouter()
 
-# Endpoint para registrar un nuevo usuario
+# Endpoint registrar usuario
 @router.post("/register", response_model=UserCreateResponse)
 def register_user(user: UserCreate, db: Session = Depends(get_db)):
-    # Verificar si el correo electrónico ya está registrado
+    # Verificar correo electrónico para evitar correos duplicados
     existing_email = db.query(User).filter(User.email == user.email).first()
     if existing_email:
         raise HTTPException(
@@ -26,7 +26,7 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
             detail="Username already taken"
         )
 
-    # Creo el nuevo usuario con hash
+    # Crea el nuevo usuario y hashea la password
     hashed_password = hash_password(user.password)
     new_user = User(
         username=user.username,
