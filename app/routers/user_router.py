@@ -11,7 +11,7 @@ router = APIRouter()
 # Endpoint registrar usuario
 @router.post("/register", response_model=UserCreateResponse)
 def register_user(user: UserCreate, db: Session = Depends(get_db)):
-    # Verificar correo electrónico para evitar correos duplicados
+    # Verifico correo electrónico para evitar correos duplicados
     existing_email = db.query(User).filter(User.email == user.email).first()
     if existing_email:
         raise HTTPException(

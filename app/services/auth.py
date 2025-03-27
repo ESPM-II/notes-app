@@ -85,7 +85,6 @@ def get_current_user(
         print(f"DEBUG: Error al decodificar token: {e}")
         raise credentials_exception
 
-    # Buscar al usuario por el user_id en la base de datos
     user = db.query(User).filter(User.id == user_id).first()
     if user is None:
         raise credentials_exception

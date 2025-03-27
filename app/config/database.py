@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 # Cargar variables de entorno
 load_dotenv()
 
-# Conexión a PostgreSQL 
+# Conexión a PostgreSQL
 DATABASE_URL = os.getenv(
     "DATABASE_URL", "postgresql://postgres:Db2025!@localhost:5432/note_app"
 )

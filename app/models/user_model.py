@@ -11,5 +11,4 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
 
-    
     notes = relationship("Note", back_populates="owner", cascade="all, delete-orphan")
