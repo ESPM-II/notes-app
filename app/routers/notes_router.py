@@ -5,7 +5,7 @@ from app.models.note_model import Note
 from app.schemas.note_schema import (
     NoteCreate,
     NoteResponse,
-)  # Ya importado correctamente
+)
 from app.services.auth import get_current_user
 from typing import List
 
@@ -50,7 +50,7 @@ def get_note(
     note = db.query(Note).filter(Note.id == id, Note.user_id == current_user.id).first()
     if not note:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Nota no encontrada"
+            status_code=status.HTTP_404_NOT_FOUND, detail="Note not found"
         )
     return note
 
@@ -67,14 +67,14 @@ def update_note(
     note = db.query(Note).filter(Note.id == id).first()
 
     if not note:
-        raise HTTPException(status_code=404, detail="Nota no encontrada")
+        raise HTTPException(status_code=404, detail="Note not found")
 
     if note.user_id != current_user.id:
-        raise HTTPException(status_code=403, detail="No puedes editar esta nota")
+        raise HTTPException(status_code=403, detail="You cannot edit this note")
 
     if note.version != note_update.version:
         raise HTTPException(
-            status_code=400, detail="La nota ha sido modificada previamente"
+            status_code=400, detail="The note has been previously modified"
         )
 
     note.title = note_update.title
@@ -97,7 +97,7 @@ def delete_note(
     note = db.query(Note).filter(Note.id == id, Note.user_id == current_user.id).first()
     if not note:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Nota no encontrada"
+            status_code=status.HTTP_404_NOT_FOUND, detail="Note not found"
         )
 
     db.delete(note)
