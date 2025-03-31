@@ -68,7 +68,5 @@ Es importante que la contraseña de PostgreSQL sea Db2025! para evitar problemas
 
 Si poseen otra configuración de base de datos, actualizar el archivo .env y asegurarse de modificar la cadena de conexión (DATABASE_URL).
 
-Autor
-
 Desarrollado por Juan José Alegría.
 
