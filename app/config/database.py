@@ -4,10 +4,10 @@ from sqlalchemy.orm import sessionmaker
 import os
 from dotenv import load_dotenv
 
-# Cargar variables de entorno desde el .env
+# Cargar variables
 load_dotenv()
 
-# Obtener la URL de la base de datos desde el .env
+# Obtener la URL de la base desde el .env
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if not DATABASE_URL:
