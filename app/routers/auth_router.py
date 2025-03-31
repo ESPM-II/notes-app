@@ -13,7 +13,7 @@ class LoginRequest(BaseModel):
     password: str
 
 
-# Endpoint login
+# POST /login - Endpoint login
 @router.post("/login")
 def login(login_request: LoginRequest, db: Session = Depends(get_db)):
     # Buscar usuario según los datos ingresados en el request de login

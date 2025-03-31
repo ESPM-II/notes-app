@@ -4,18 +4,19 @@ from sqlalchemy.orm import sessionmaker
 import os
 from dotenv import load_dotenv
 
-# Cargar variables de entorno
+# Cargar variables de entorno desde el .env
 load_dotenv()
 
-# Conexión a PostgreSQL 
-DATABASE_URL = os.getenv(
-    "DATABASE_URL", "postgresql://postgres:Db2025!@localhost:5432/note_app"
-)
+# Obtener la URL de la base de datos desde el .env
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-# Creo el motor de la DB
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL no está definido en el archivo .env")
+
+# Crear el motor de la DB
 engine = create_engine(DATABASE_URL)
 
-# Creo la sesión
+# Crear la sesión
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Base para los modelos
